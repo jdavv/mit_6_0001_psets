@@ -69,9 +69,6 @@ def is_word_guessed(secret_word, letters_guessed):
     return guessed
 
 
-
-
-
 def get_guessed_word(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing
@@ -94,10 +91,14 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-    
-    
+    not_guessed = string.ascii_lowercase
+    letters_left_to_guess = ''
+    for char in not_guessed:
+        if char not in letters_guessed:
+            letters_left_to_guess += char
+
+    return letters_left_to_guess
+
 
 def hangman(secret_word):
     '''

@@ -142,13 +142,13 @@ def hangman(secret_word):
             letters_guessed += guess
             print(get_guessed_word(secret_word, letters_guessed), '\n')
             print(get_available_letters(letters_guessed=letters_guessed), '\n')
-            if is_word_guessed(secret_word,letters_guessed) == True:
+            if is_word_guessed(secret_word,letters_guessed) is True:
                 print(secret_word, 'is correct')
                 print('You Win!')
                 break
             current_guesses += 1
         else:
-            print('Recieved: ', len(guess), 'letters, Required: 1')
+            print('Recieved:', len(guess), 'letters, Required: 1')
     else:
         print('You lost')
 

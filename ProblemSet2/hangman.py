@@ -125,8 +125,32 @@ def hangman(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+
+    current_guesses = 0
+    letters_guessed = []
+    print('\n')
+    print('I am thinking of a word that is', len(secret_word), 'letters long:')
+    print(get_guessed_word(secret_word, letters_guessed), '\n')
+    print('Letters available: ')
+    print(get_available_letters(letters_guessed=letters_guessed), '\n')
+    while current_guesses < 6:
+        print((6 - current_guesses), ' guesses left', '\n')
+        guess = input('Guess one letter...')
+        print(get_guessed_word(secret_word, letters_guessed))
+        if len(guess) == 1:
+            print('You guessed ', guess, '\n')
+            letters_guessed += guess
+            print(get_guessed_word(secret_word, letters_guessed), '\n')
+            print(get_available_letters(letters_guessed=letters_guessed), '\n')
+            if is_word_guessed(secret_word,letters_guessed) == True:
+                print(secret_word, 'is correct')
+                print('You Win!')
+                break
+            current_guesses += 1
+        else:
+            print('Recieved: ', len(guess), 'letters, Required: 1')
+    else:
+        print('You lost')
 
 
 
@@ -213,7 +237,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
+    secret_word = 'dog'  # choose_word(wordlist)
     hangman(secret_word)
 
 ###############

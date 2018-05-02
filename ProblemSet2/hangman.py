@@ -136,6 +136,7 @@ def hangman(secret_word):
     while current_guesses < 6:
         print((6 - current_guesses), ' guesses left', '\n')
         guess = input('Guess one letter...')
+        guess = guess.lower()
         print(get_guessed_word(secret_word, letters_guessed))
         if len(guess) == 1:
             print('You guessed ', guess, '\n')

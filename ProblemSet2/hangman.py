@@ -100,6 +100,21 @@ def get_available_letters(letters_guessed):
     return letters_left_to_guess
 
 
+def check_user_input(user_guess):
+    '''
+    This function returns True if user_guess is NOT a digit, punctuation, or whitespace
+    :param user_guess: a string
+    :return: accepted a boolean of True or False
+    '''
+    bad_chars = string.digits+string.punctuation+string.whitespace
+    if user_guess in bad_chars:
+        accepted = False
+    else:
+        accepted = True
+
+    return accepted
+
+
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -139,17 +154,20 @@ def hangman(secret_word):
         guess = guess.lower()
         print(get_guessed_word(secret_word, letters_guessed))
         if len(guess) == 1:
-            print('You guessed ', guess, '\n')
-            letters_guessed += guess
-            print(get_guessed_word(secret_word, letters_guessed), '\n')
-            print(get_available_letters(letters_guessed=letters_guessed), '\n')
-            if is_word_guessed(secret_word,letters_guessed) is True:
-                print(secret_word, 'is correct')
-                print('You Win!')
-                break
-            current_guesses += 1
+            if check_user_input(guess) is True:
+                print('You guessed ', guess, '\n')
+                letters_guessed += guess
+                print(get_guessed_word(secret_word, letters_guessed), '\n')
+                print(get_available_letters(letters_guessed=letters_guessed), '\n')
+                if is_word_guessed(secret_word,letters_guessed) is True:
+                    print(secret_word, 'is correct')
+                    print('You Win!')
+                    break
+                current_guesses += 1
+            else:
+                print('Thats not in the alphabet...')
         else:
-            print('Recieved:', len(guess), 'letters, Required: 1')
+            print('Recieved:', len(guess), 'characters, Required: 1')
     else:
         print('You lost')
 

@@ -155,11 +155,13 @@ def hangman(secret_word):
         print(get_guessed_word(secret_word, letters_guessed))
         if len(guess) == 1:
             if check_user_input(guess) is True:
+                if guess in letters_guessed:
+                    print('you have already tried ', guess, 'try again')
                 print('You guessed ', guess, '\n')
                 letters_guessed += guess
                 print(get_guessed_word(secret_word, letters_guessed), '\n')
                 print(get_available_letters(letters_guessed=letters_guessed), '\n')
-                if is_word_guessed(secret_word,letters_guessed) is True:
+                if is_word_guessed(secret_word, letters_guessed) is True:
                     print(secret_word, 'is correct')
                     print('You Win!')
                     break

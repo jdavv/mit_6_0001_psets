@@ -115,6 +115,21 @@ def check_user_input(user_guess):
     return accepted
 
 
+def check_if_vowel(user_guess):
+    '''
+    Check if the guess is a vowel
+    :param user_guess: a string
+    :return: is_a_vowel boolean
+    '''
+    vowels =['a', 'e', 'i', 'o', 'u']
+    if user_guess in vowels:
+        is_a_vowel = True
+    else:
+        is_a_vowel = False
+
+    return is_a_vowel
+
+
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -154,24 +169,31 @@ def hangman(secret_word):
         guess = input('Guess one letter...')
         guess = guess.lower()
         print(get_guessed_word(secret_word, letters_guessed))
+
         if len(guess) == 1:
             if check_user_input(guess) is True:
                 if guess in letters_guessed:
                     print('you have already tried ', guess, 'try again')
+
                 print('You guessed ', guess, '\n')
                 letters_guessed += guess
                 print(get_guessed_word(secret_word, letters_guessed), '\n')
                 print(get_available_letters(letters_guessed=letters_guessed), '\n')
+
                 if is_word_guessed(secret_word, letters_guessed) is True:
                     print(secret_word, 'is correct')
                     print('You Win!')
                     break
-                current_guesses += 1
+
+                if check_if_vowel(guess) is True:
+                        current_guesses += 2
+                else:
+                    current_guesses += 1
+
             else:
                 warnings += 1
-                print('Thats not in the alphabet...')
+                print('That is not in the alphabet...')
                 print('You have ', 3 - warnings, 'warnings left')
-
         else:
             warnings += 1
             print('Received:', len(guess), 'characters, Required: 1')

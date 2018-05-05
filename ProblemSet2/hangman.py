@@ -121,6 +121,7 @@ def check_if_vowel(user_guess):
     :param user_guess: a string with a length of 1 character
     :return: is_a_vowel boolean
     '''
+    
     vowels = ['a', 'e', 'i', 'o', 'u']
     if user_guess in vowels:
         is_a_vowel = True
@@ -156,27 +157,39 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
 
+    # Settings
+    max_allowed_guesses = 6
+    max_allowed_warnings = 3
+
+    # Init game variables
     current_guesses = 0
-    letters_guessed = []
     warnings = 0
+    letters_guessed = []
+
     print('\n')
     print('I am thinking of a word that is', len(secret_word), 'letters long:')
     print(get_guessed_word(secret_word, letters_guessed), '\n')
+
     print('Letters available: ')
     print(get_available_letters(letters_guessed=letters_guessed), '\n')
-    while current_guesses < 6 and warnings < 3:
-        print((6 - current_guesses), ' guesses left', '\n')
-        guess = input('Guess one letter...')
-        guess = guess.lower()
+
+    while current_guesses < max_allowed_guesses and warnings < max_allowed_warnings:
+        print('Guesses left : ', (max_allowed_guesses - current_guesses))
+        print('Warnings : ', warnings)
+        print('------')
+
+        guess = input('Guess one letter...').lower()
         print(get_guessed_word(secret_word, letters_guessed))
 
         if len(guess) == 1:
-            if check_user_input(guess) is True:
-                if guess in letters_guessed:
-                    print('you have already tried ', guess, 'try again')
 
-                print('You guessed ', guess, '\n')
+            if check_user_input(guess) is True:
+
+                if guess in letters_guessed:
+                    print('You have already tried ', guess, 'guess a different letter...')
+
                 letters_guessed += guess
+                print('You guessed ', guess, '\n')
                 print(get_guessed_word(secret_word, letters_guessed), '\n')
                 print(get_available_letters(letters_guessed=letters_guessed), '\n')
 
@@ -186,18 +199,19 @@ def hangman(secret_word):
                     break
 
                 if check_if_vowel(guess) is True:
+                    if guess in secret_word:
+                        current_guesses = current_guesses
+                    else:
                         current_guesses += 2
-                else:
-                    current_guesses += 1
 
             else:
                 warnings += 1
                 print('That is not in the alphabet...')
-                print('You have ', 3 - warnings, 'warnings left')
+                print('You have ', max_allowed_warnings - warnings, 'warnings left')
         else:
             warnings += 1
-            print('Received:', len(guess), 'characters, Required: 1')
-            print('You have ', 3 - warnings, 'warnings left')
+            print('Received:', len(guess), 'characters, required: 1')
+            print('You have ', max_allowed_warnings - warnings, 'warnings left')
     else:
         print('You lost')
 

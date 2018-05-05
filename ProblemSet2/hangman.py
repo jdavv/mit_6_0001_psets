@@ -118,7 +118,7 @@ def check_user_input(user_guess):
 def check_if_vowel(user_guess):
     '''
     Check if the guess is a vowel
-    :param user_guess: a string
+    :param user_guess: a string with a length of 1 character
     :return: is_a_vowel boolean
     '''
     vowels = ['a', 'e', 'i', 'o', 'u']

@@ -143,12 +143,13 @@ def hangman(secret_word):
 
     current_guesses = 0
     letters_guessed = []
+    warnings = 0
     print('\n')
     print('I am thinking of a word that is', len(secret_word), 'letters long:')
     print(get_guessed_word(secret_word, letters_guessed), '\n')
     print('Letters available: ')
     print(get_available_letters(letters_guessed=letters_guessed), '\n')
-    while current_guesses < 6:
+    while current_guesses < 6 and warnings < 3:
         print((6 - current_guesses), ' guesses left', '\n')
         guess = input('Guess one letter...')
         guess = guess.lower()
@@ -167,9 +168,14 @@ def hangman(secret_word):
                     break
                 current_guesses += 1
             else:
+                warnings += 1
                 print('Thats not in the alphabet...')
+                print('You have ', 3 - warnings, 'warnings left')
+
         else:
+            warnings += 1
             print('Recieved:', len(guess), 'characters, Required: 1')
+            print('You have ', 3 - warnings, 'warnings left')
     else:
         print('You lost')
 

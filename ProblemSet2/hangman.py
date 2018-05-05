@@ -174,7 +174,7 @@ def hangman(secret_word):
 
         else:
             warnings += 1
-            print('Recieved:', len(guess), 'characters, Required: 1')
+            print('Received:', len(guess), 'characters, Required: 1')
             print('You have ', 3 - warnings, 'warnings left')
     else:
         print('You lost')

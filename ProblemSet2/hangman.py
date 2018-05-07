@@ -185,7 +185,7 @@ def hangman(secret_word):
 
                     if warnings < max_allowed_warnings:
                         warnings += 1
-                        print('Oops! You have already guessed that letter. You have:',
+                        print('Oops! You have already guessed that letter. You have',
                               max_allowed_warnings - warnings, 'warnings left')
 
                     else:

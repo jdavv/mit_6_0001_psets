@@ -179,16 +179,13 @@ def hangman(secret_word):
     warnings = 0
     letters_guessed = []
 
-    print('\n')
-    print('I am thinking of a word that is', len(secret_word), 'letters long:')
-    print(get_guessed_word(secret_word, letters_guessed), '\n')
-
-    print('Available Letters: ', get_available_letters(letters_guessed=letters_guessed), '\n')
+    print('\n I am thinking of a word that is', len(secret_word), 'letters long: \n',
+          get_guessed_word(secret_word, letters_guessed), '\n', 'Available Letters: \n',
+          get_available_letters(letters_guessed=letters_guessed), '\n')
 
     while current_guesses < max_allowed_guesses:
 
-        print('Guesses left : ', (max_allowed_guesses - current_guesses))
-        print('------')
+        print('Guesses left : ', (max_allowed_guesses - current_guesses), '\n ------')
 
         guess = input('Guess one letter...').lower()
         print('Word : ', get_guessed_word(secret_word, letters_guessed), '\n')
@@ -212,8 +209,8 @@ def hangman(secret_word):
                     letters_guessed += guess
                     print('Nice guess! \n')
 
-                print('Word : ', get_guessed_word(secret_word, letters_guessed), '\n')
-                print('Available Letters: ', get_available_letters(letters_guessed=letters_guessed), '\n')
+                print('Word : ', get_guessed_word(secret_word, letters_guessed), '\n',
+                      'Available Letters: ', get_available_letters(letters_guessed=letters_guessed), '\n')
 
                 if is_word_guessed(secret_word, letters_guessed) is True:
                     print(secret_word, 'is correct, you win! Your score was',
@@ -325,7 +322,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = 'dooog'  # choose_word(wordlist)
+    secret_word = choose_word(wordlist)
     hangman(secret_word)
 
 ###############

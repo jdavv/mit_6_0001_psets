@@ -128,6 +128,22 @@ def check_if_vowel(user_guess):
     return is_a_vowel
 
 
+def calculate_score(current_guesses, max_allowed_guesses, secret_word):
+    '''
+    :param current_guesses:
+    :param max_allowed_guesses:
+    :param secret_word:
+    :return: total_score an integer representing the users total calculated score after a game
+    '''
+    unique_chars = []
+    for char in secret_word:
+        if char not in unique_chars:
+            unique_chars.append(char)
+
+    total_score = (max_allowed_guesses - current_guesses) * len(unique_chars)
+    return total_score
+
+
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -200,8 +216,8 @@ def hangman(secret_word):
                 print('Available Letters: ', get_available_letters(letters_guessed=letters_guessed), '\n')
 
                 if is_word_guessed(secret_word, letters_guessed) is True:
-                    print(secret_word, 'is correct')
-                    print('You Win!')
+                    print(secret_word, 'is correct, you win! Your score was',
+                          calculate_score(current_guesses, max_allowed_guesses, secret_word))
                     break
 
                 if check_if_vowel(guess) is True:
@@ -309,7 +325,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = 'dog'  # choose_word(wordlist)
+    secret_word = 'dooog'  # choose_word(wordlist)
     hangman(secret_word)
 
 ###############
